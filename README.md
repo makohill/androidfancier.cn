@@ -1,8 +1,7 @@
 # androidfancier.cn社区代码，基于[gopher](https://github.com/jimmykuu/gopher)
 
-配置说明
 
-复制文件  *etc/config.json* 
+配置文件  *etc/config.json* 
 
 - superusers: 内容为用户名,如果没有管理员,内容为"",如果有多个,用英文逗号隔开
 - analytics_file: 内容为统计分析代码的文件名
@@ -14,43 +13,11 @@
 - gt_captcha_id: geetest.com 服务的 id
 - gt_private_key: geetest.com 服务的 key
 
-内容如下:
-
-    {
-        "host": "http://localhost:8888",
-        "port": 8888,
-        "db": "localhost:27017",
-        "cookie_secret": "05e0ba2eca9411e18155109add4b8aac",
-        "smtp_username": "username@example.com",
-        "smtp_password": "password",
-        "smtp_host": "smtp.example.com",
-        "smtp_addr": "smtp.example.com:25",
-        "from_email": "who@example.com",
-        "superusers": "another",
-        "analytics_file": "",
-        "time_zone_offset": 8,
-        "static_file_version": 1,
-        "go_get_path": "/tmp/download",
-        "packages_download_path": "/var/go/gopher/static/download/packages",
-        "public_salt": "",
-		"github_auth_client_id": "example",
-		"github_auth_client_secret": "example",
-		"github_login_redirect": "/",
-		"github_login_success_redirect": "/auth/signup",
-		"deferpanic_api_key": "",
-        "gt_captcha_id": "",
-        "gt_private_key": ""
-    }
 
 需要先启动MongoDB
 
-Linux/Unix/OS X:
-
-    $ $GOPATH/bin/server
-
-Windows:
-
-    > $GOPATH\bin\server.exe
+然后运行
+$ $GOPATH/bin/server
 
 
 
