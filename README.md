@@ -16,8 +16,7 @@
 
 需要先启动MongoDB
 
-然后运行
-$ $GOPATH/bin/server
+然后运行$GOPATH/bin/server
 
 
 
