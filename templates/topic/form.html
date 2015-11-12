@@ -1,0 +1,58 @@
+{{define "Title"}}{{.title}}主题{{end}}
+{{define "ContentWidth"}}12{{end}}
+{{define "Breadcrumb"}}
+<ul class="breadcrumb">
+  <li><a href="/"><i class="glyphicon glyphicon-home"></i> 首页</a></li>
+  <li class="active">{{.title}}主题</li>
+</ul>
+{{end}}
+{{define "Content"}}
+<link rel="stylesheet" href="http://gopher.qiniudn.com/static/lib/editor.md-1.4.3/css/editormd.min.css">
+<div class="content">
+  <form action="" method="post" id="topic-form" role="form">
+	<fieldset>
+      {{$node := .form.Field "node"}}
+      <div class="form-group">
+        {{$node.RenderLabel}}
+        {{$node.RenderInput `class="form-control"`}}
+      </div>
+      {{$title := .form.Field "title"}}
+      <div class="form-group">
+        {{$title.RenderLabel}}
+        {{$title.RenderInput `class="form-control"` `rows="1"` `placeholder="标题，注意文字长度，如果标题能够表达完整内容，正文可以为空"`}}
+      </div>
+	  <div class="form-group">
+		<div id="editormd">
+          <textarea style="display:none;">{{.form.Value "editormd-markdown-doc"}}</textarea>
+		</div>
+	  </div>
+
+	  <input type="submit" class="btn btn-primary" value="{{.title}}">
+	</fieldset>
+  </form>
+</div>
+<script type="text/javascript" src="http://7xj1eq.com1.z0.glb.clouddn.com/static/lib/editor.md-1.4.3/editormd.min.js"></script>
+  <script type="text/javascript">
+	var editor;
+    $(function() {
+      editor = editormd("editormd", {
+       autoFocus: false,
+	     height: 400,        
+        path: "http://7xj1eq.com1.z0.glb.clouddn.com/static/lib/",
+	      placeholder: "Mardkown，提交前请查看预览格式是否正确",
+        toolbarIcons: function() {
+          return ["undo", "redo", "|", "bold", "italic", "quote", "|", "h1", "h2", "h3", "h4", "h5", "h6", "|", "list-ul", "list-ol", "hr", "|", "link", "reference-link", "image", "code", "preformatted-text", "code-block", "|", "goto-line", "watch", "preview", "fullscreen"];
+        },
+	    saveHTMLToTextarea: true,
+	    imageUpload: true,      
+	    imageFormats : ["jpg", "jpeg", "gif", "png"],
+      imageUploadURL : "/upload/image"
+      });
+    });
+  </script>
+{{end}}
+
+{{define "LeftSide"}}{{end}}
+{{define "RightSide"}}
+
+{{end}}

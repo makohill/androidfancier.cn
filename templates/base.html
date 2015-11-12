@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+	<meta http-equiv="Content-type" content="text/html; charset=utf-8">
+	<meta name="keywords" content="Android,androidfancier" />
+	<meta name="description" content="卓友社区，致力于打造国内Android开发者交流的地方，提供社区，文章">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta property="wb:webmaster" content="7e9b420372e9d83e" />
+	<meta property="qc:admins" content="44113752776774167436375" />
+	<title>{{template "Title" .}} - AndroidFancier</title>
+	<script type="text/javascript" src="http://cdn.staticfile.org/jquery/2.0.3/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="http://7xj1eq.com1.z0.glb.clouddn.com/static/css/wmd.css" type="text/css">
+	<link rel="stylesheet" href="/static/css/style.css?v=12" type="text/css">
+	<link rel="stylesheet" href="http://7xj1eq.com1.z0.glb.clouddn.com/static/css/prettify.css" type="text/css">
+	<link rel="stylesheet" href="http://7xj1eq.com1.z0.glb.clouddn.com/static/css/jquery.atwho.min.css" type="text/css">
+	<link rel="shortcut icon" href="http://7xj1eq.com1.z0.glb.clouddn.com/favicon.ico">
+</head>
+<body>
+	<header>
+		<div class="container">
+			<a class="brand" href="/"><img src="http://7xj1eq.com1.z0.glb.clouddn.com/androidfancier.png?imageView2/2/h/60/q/100" alt="AndroidFancier"></a>
+			{{if .username}}
+			<ul class="nav navbar-nav pull-right" style="margin-top: 1em;">
+				<li class="dropdown">
+					<a href="#" class="dropdown-toggle" data-toggle="dropdown">
+						我的空间
+						<b class="caret"></b>
+					</a>
+                    <ul class="dropdown-menu" role="menu">
+						<li><a href="/profile"><i class="glyphicon glyphicon-cog"></i> 设置</a></li>
+						<li><a href="/change_password"><i class="glyphicon glyphicon-edit"></i> 修改密码</a></li>
+						{{if .isSuperUser}}
+							<li><a href="/admin"><i class="glyphicon glyphicon-wrench"></i> 管理</a></li>
+						{{end}}
+						<li class="divider"></li>
+						<li><a href="/signout"><i class="glyphicon glyphicon-off"></i> 登出</a></li>
+					</ul>
+				</li>
+			</ul>
+			{{end}}
+			<div class="pull-right" style="margin-top: 24px;">
+				<div style="height: 5px;"></div>
+				{{if .username}}
+					{{.username}}，你好 &nbsp;&nbsp;
+				{{else}}
+					<a href="/signin">登录</a> <span class="divider">|</span>
+					<a href="/signup">注册</a>
+				{{end}}
+			</div>
+		</div>
+	</header>
+	{{$ads := ads "top" .db}}
+	{{range $ads}}
+	<div class="container" style="margin-bottom: 8px;">
+	  <div class="row">
+		<div class="col-md-12">
+		  {{html .Code}}
+		</div>
+	  </div>
+	</div>
+	{{end}}
+	<div class="container">
+        <nav class="navbar navbar-default" role="navigation" id="navbar">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-ex1-collapse">
+				<span class="sr-only">Toggle navigation</span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				</button>
+			</div>
+			<div class="collapse navbar-collapse navbar-ex1-collapse">
+				<ul class="nav navbar-nav" id="menu">
+					<li{{if eq .active "topic"}} class="active"{{end}}><a href="/">社区</a></li>
+					<li{{if eq .active "article"}} class="active"{{end}}><a href="/articles">文章</a></li>
+					<li{{if eq .active "site"}} class="active"{{end}}><a href="/sites">酷站</a></li>
+					<li{{if eq .active "package"}} class="active"{{end}}><a href="/packages">常用库</a></li>
+					<li><a href="/download">下载</a></li>
+					
+					
+					
+					
+				</ul>
+				<form action="/search" class="navbar-form pull-right" method="get" role="search">
+					<div class="form-group">
+						<input name="q" type="text" class="form-control" placeholder="搜索">
+					</div>
+				</form>
+			</div>
+		</nav>
+	</div>
+	<div class="container">
+		<div class="row">
+			{{template "LeftSide" .}}
+            <div class="col-md-{{template "ContentWidth"}}">
+			{{template "Breadcrumb" .}}
+			{{template "Content" .}}
+			</div>
+			{{template "RightSide" .}}
+		</div>
+	</div>
+	<footer class="footer">
+		<div class="container">
+			<p>
+				<ul class="footer-links">
+					<li><a href="/about">关于</a>
+					<li class="muted">&middot;</li>				
+					<li><a href="/link">友链</a></li>
+					<li class="muted">&middot;</li>
+					<li><a href="/go/feedback">反馈</a></li>
+					<li class="muted">&middot;</li>
+					<li><a href="https://github.com/jimmykuu/gopher" target="_blank">GitHub</a></li>
+				</ul>
+			</p>
+			<p>&copy;2015-2015 androidfancier.cn</p>
+			<p>Website built by <a href="https://github.com/jimmykuu/gopher" target="_blank" rel="nofollow">Gopher</a>, powered by <a href="http://golang.org/" target="_blank" rel="nofollow">Golang</a>, <a href="http://www.mongodb.org/" target="_blank" rel="nofollow">MongoDB</a>.</p>
+			
+			<p class="friendly_links clearfix">
+			  {{range .linksOnBottom}}
+			  <a href="{{.URL}}" target="_blank"><img src="{{.Logo}}" alt="{{.Name}}"></a>
+			  {{end}}
+			</p>
+		</div>
+	</footer>
+	{{.analyticsCode}}
+</body>
+<script type="text/javascript">
+$(function(){
+		$('#reply_clear').click(function(){
+			var data = {};
+			$.getJSON("/member/{{.username}}/clear/reply",data,function(data,textStatus,jqXHR){
+				console.log(data);
+				if(data.status){
+					location.reload();
+				}
+			})
+		});
+		$('#at_clear').click(function(){
+			var data = {};
+			$.getJSON("/member/{{.username}}/clear/at",data,function(data,textStatus,jqXHR){
+				console.log(data);
+				if(data.status){
+					location.reload();
+				}
+			})
+		});
+})
+</script>
+<script type="text/javascript" src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="http://gopher.qiniudn.com/static/js/jquery.caret.min.js?v=0.0.9"></script>
+<script type="text/javascript" src="http://gopher.qiniudn.com/static/js/jquery.atwho.min.js?v=0.4.11"></script>
+<script type="text/javascript" src="/static/js/application.js?v={{.staticFileVersion}}"></script>
+</html>
